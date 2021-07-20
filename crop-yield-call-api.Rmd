@@ -1,0 +1,47 @@
+---
+title: "Crop Yields - calling APIs"
+output: html_notebook
+---
+
+
+First, let's construct our base URL.
+
+```{r}
+library(httr)
+
+b_url <- "https://colorado.rstudio.com/rsc/crop-yield-api/crop-yield"
+
+```
+
+
+Now, we can use `modify_url()` to update the base URL with our parameters.
+
+```{r}
+
+params <- list(.year = 1975, .product = "beans", .entity = "germany")
+
+query_url <- modify_url(url = b_url, query = params)
+
+query_url
+```
+
+
+It's time to send the request using the appropriate method - in this case, GET.
+
+```{r}
+res <- GET(query_url)
+
+res
+```
+
+
+We need to parse the response, which is in JSON, to work with it in R.
+
+```{r}
+resp_raw <- content(res, as = "text")
+
+resp_raw
+
+jsonlite::fromJSON(resp_raw)
+```
+

@@ -1,0 +1,21 @@
+---
+title: "Crop Yield Function"
+output: html_notebook
+---
+
+
+```{r}
+library(tidyverse)
+
+crop_yields <- read_csv("data/crop_yields.csv")
+
+filter_yields <- function(.year, .product, .entity) {
+
+ filter(crop_yields,
+      year == .year,
+      product == .product,
+      entity == .entity)
+}
+
+filter_yields(2012, "potatoes", "guatemala")
+```
