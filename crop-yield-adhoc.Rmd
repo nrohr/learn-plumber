@@ -1,0 +1,17 @@
+---
+title: "Crop Yield - Ad-Hoc Analysis"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+
+crop_yields <- read_csv("data/crop_yields.csv")
+
+# We could filter our data set
+filter(crop_yields,
+       year == 2018,
+       product == "maize",
+       entity == "cuba")
+```
+
